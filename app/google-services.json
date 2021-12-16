@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "588768788766",
+    "project_id": "nogayoga-a3e4f",
+    "storage_bucket": "nogayoga-a3e4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588768788766:android:e5444e0ad80cd2def8490f",
+        "android_client_info": {
+          "package_name": "com.example.nogayoga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588768788766-pfdmkkjlju9tepnh7nunia8km1ubgugr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0zlr7BXx-3REmiwksIYslUqmwk6trSiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588768788766-pfdmkkjlju9tepnh7nunia8km1ubgugr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
