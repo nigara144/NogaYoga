@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private final String EMAIL = "editEmail";
     private TextView register;
     private EditText editPassword, editEmail;
     private ProgressBar progressBar;
@@ -105,4 +106,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+    private void sentIntent() {
+        Intent intent=getIntent();
+        Intent gameActivityIntent = new Intent(MainActivity.this, HomeActivity.class);
+        gameActivityIntent.putExtra(EMAIL, editEmail.toString());
+//        gameActivityIntent.putExtra(FULLNAME,editEmail);
+    }
+
 }
