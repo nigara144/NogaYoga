@@ -79,7 +79,7 @@ public class RegisterUser  extends AppCompatActivity implements View.OnClickList
         }
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             editEmail.setError("Please provide valid email");
-            editPassword.requestFocus();
+            editEmail.requestFocus();
             return;
         }
         if(password.length() < 6){
