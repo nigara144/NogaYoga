@@ -12,11 +12,12 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-allprojects {
-    repositories {
-        google()  // Google's Maven repository
-    }
-}
+//allprojects {
+//    repositories {
+//        google()  // Google's Maven repository
+//
+//    }
+//}
 
 
 task clean(type: Delete) {

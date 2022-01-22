@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CalendarFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Add TextView to display the date -->
+        <TextView
+            android:id="@+id/date_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:text="Calendar"
+            android:textColor="@color/round_button_color"
+            android:textStyle="bold"
+            android:textSize="25dp"/>
+
+
+        <!-- Add CalendarView to display the Calendar -->
+        <CalendarView
+            android:id="@+id/calendar"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_button"
+            android:layout_centerHorizontal="true"
+            >
+        </CalendarView>
+
+        <TextView
+            android:id="@+id/join_class_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="475dp"
+            android:text="Join my class"
+            android:textColor="@color/black"
+            android:textStyle="normal"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:src="@drawable/add"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="520dp"
+            app:tint="@color/round_button_color" />
+
+    </RelativeLayout>
+
+</FrameLayout>
