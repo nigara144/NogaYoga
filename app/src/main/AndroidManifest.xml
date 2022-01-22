@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NogaYoga">
         <activity
-            android:name=".HomeActivity"
+            android:name=".GeneralActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
