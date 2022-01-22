@@ -1,4 +1,4 @@
-package com.example.nogayoga;
+package com.example.nogayoga.Models;
 
 import android.util.Log;
 

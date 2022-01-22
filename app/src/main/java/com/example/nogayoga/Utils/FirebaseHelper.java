@@ -1,4 +1,4 @@
-package com.example.nogayoga;
+package com.example.nogayoga.Utils;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.example.nogayoga.Interfaces.LogoutSuccessCallBack;
 import com.example.nogayoga.Interfaces.UserReadyCallBack;
+import com.example.nogayoga.Models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,8 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 public class FirebaseHelper {
-     static FirebaseAuth mAuth = FirebaseAuth.getInstance();
-     static FirebaseFirestore db = FirebaseFirestore.getInstance();
+     public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
+     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 //    public User isUserLoggedIn1(){
 //        if(mAuth.getCurrentUser() != null){

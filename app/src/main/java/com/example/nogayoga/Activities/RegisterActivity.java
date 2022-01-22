@@ -1,7 +1,6 @@
-package com.example.nogayoga;
+package com.example.nogayoga.Activities;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -15,20 +14,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nogayoga.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterUser  extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView logo, registerUser;
     private EditText editFullName, editEmail, editPassword;
@@ -142,7 +141,7 @@ public class RegisterUser  extends AppCompatActivity implements View.OnClickList
 //                                }
 //                            });
                         }else{
-                            Toast.makeText(RegisterUser.this, "Failed to register.Try again", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Failed to register.Try again", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }

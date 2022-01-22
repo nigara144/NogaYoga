@@ -7,11 +7,11 @@
         android:title="Home"
         android:iconTint="@color/round_button_color"/>
 
-    <item
-        android:id="@+id/nav_videos"
-        android:icon="@drawable/videos"
-        android:title="Videos"
-        android:iconTint="@color/round_button_color"/>
+<!--    <item-->
+<!--        android:id="@+id/nav_videos"-->
+<!--        android:icon="@drawable/videos"-->
+<!--        android:title="Videos"-->
+<!--        android:iconTint="@color/round_button_color"/>-->
 
     <item
         android:id="@+id/nav_calendar"

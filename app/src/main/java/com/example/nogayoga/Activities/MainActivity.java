@@ -1,7 +1,6 @@
-package com.example.nogayoga;
+package com.example.nogayoga.Activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,19 +14,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nogayoga.Interfaces.LogoutSuccessCallBack;
 import com.example.nogayoga.Interfaces.UserReadyCallBack;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.nogayoga.Models.User;
+import com.example.nogayoga.R;
+import com.example.nogayoga.Utils.FirebaseHelper;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.core.Constants;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -37,14 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressBar progressBar;
     private Button loginUser;
     private String userID;
-    static FirebaseHelper firebaseHelper;
     User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         register = (TextView) findViewById(R.id.register);
         register.setOnClickListener(this);
@@ -62,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.register:
-                startActivity(new Intent(this, RegisterUser.class));
+                startActivity(new Intent(this, RegisterActivity.class));
                 break;
             case R.id.sign_in_btn:
                 userLogin();
@@ -116,13 +106,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                             @Override
                             public void error() {
-                                Toast.makeText(MainActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                progressBar.setVisibility(View.GONE);
+                                FirebaseHelper.logOut(new LogoutSuccessCallBack() {
+                                    @Override
+                                    public void didSuccess(Boolean didSuccess) {
+                                        Toast.makeText(MainActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                        progressBar.setVisibility(View.GONE);
+                                    }
+                                });
                             }
                         });
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity.this, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
