@@ -32,6 +32,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -42,7 +43,7 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private List<Event> eventList;
+    private List<Event> joinedEventList;
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private TextView username;
@@ -55,6 +56,7 @@ public class HomeFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
         createTabs();
+        loadRecyclerViewData();
         return view;
     }
 
@@ -74,19 +76,40 @@ public class HomeFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tab_layout);
         viewPager = view.findViewById(R.id.view_pager);
         recyclerView = view.findViewById(R.id.recycler_view_home_events);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         username.setText(GeneralActivity.user.getFullName());
+        joinedEventList = new ArrayList<>();
     }
 
     private void loadRecyclerViewData() {
-        getAllJoinedEvents();
+//        joinedEventList.clear();
+        getAllJoinedEventsFromUser();
     }
 
-    private void getAllJoinedEvents() {
-
+    private void getAllJoinedEventsFromUser() {
+        String userId = FirebaseHelper.getUid();
+        CollectionReference collectionRef = FirebaseHelper.db.collection("Users").
+                document(userId).collection("Events");
+        Task<QuerySnapshot> snapshotTask = collectionRef.get();
+        snapshotTask.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+//                    Log.d("TAG", String.valueOf(task.getResult().getDocuments().size()));
+                        for(DocumentSnapshot doc: task.getResult().getDocuments()) {
+                            joinedEventList.add(new Event(doc.getString("typeName"),
+                                    doc.getString("time"), doc.getId(), doc.getString("date")));
+                        }
+                        setRecyclerView();
+                        Log.d("JOINED LIST", joinedEventList.toString());
+                }
+            }
+        });
     }
 
     public void setRecyclerView(){
-        adapter = new HomeEventsAdapter(eventList, getContext(), getActivity());
+        adapter = new HomeEventsAdapter(joinedEventList, getContext(), getActivity());
         recyclerView.setAdapter(adapter);
         if (adapter != null) {
             adapter.notifyDataSetChanged();

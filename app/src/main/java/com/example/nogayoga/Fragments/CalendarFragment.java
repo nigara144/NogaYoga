@@ -123,13 +123,4 @@ public class CalendarFragment extends Fragment {
         Log.d("EVENT: ", String.valueOf(adapter.getItemCount()));
         recyclerView.smoothScrollToPosition(adapter.getItemCount());
     }
-
-    private Date stringToDate(String aDate,String aFormat) {
-        if(aDate==null) return null;
-        ParsePosition pos = new ParsePosition(0);
-        SimpleDateFormat simpledateformat = new SimpleDateFormat(aFormat);
-        Date stringDate = simpledateformat.parse(aDate, pos);
-        return stringDate;
-    }
-
 }

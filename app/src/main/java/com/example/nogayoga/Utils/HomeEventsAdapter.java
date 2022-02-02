@@ -4,15 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nogayoga.Activities.GeneralActivity;
 import com.example.nogayoga.Models.Event;
-import com.example.nogayoga.Models.Video;
 import com.example.nogayoga.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,23 +19,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class HomeEventsAdapter extends RecyclerView.Adapter<HomeEventsAdapter.MyViewHolder>{
-    private final List<Event> eventList;
+    private List<Event> joinedEventList;
     private Context context;
     private FragmentActivity fragmentContext;
-    private String selectedDate;
+    private String eventJoinedDate;
 
-    public HomeEventsAdapter(List<Event> eventList, Context context, FragmentActivity fragmentContext, String selectedDate) {
-        this.eventList = eventList;
+    public HomeEventsAdapter(List<Event> joinedEventList, Context context, FragmentActivity activity) {
+        this.joinedEventList = joinedEventList;
         this.context = context;
-        this.fragmentContext = fragmentContext;
-        this.selectedDate = selectedDate;
-    }
-
-    public HomeEventsAdapter(List<Event> eventList, Context context, FragmentActivity activity) {
-        this.eventList = eventList;
-        this.context = context;
-        this.fragmentContext = fragmentContext;
-        this.selectedDate = selectedDate;
+        this.fragmentContext = activity;
     }
 
     @NonNull
@@ -47,13 +38,16 @@ public class HomeEventsAdapter extends RecyclerView.Adapter<HomeEventsAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull HomeEventsAdapter.MyViewHolder holder, int position) {
+        Event event = this.joinedEventList.get(position);
+        holder.eventType.setText(event.getTypeName());
+        holder.eventTime.setText(event.getTime());
+        holder.eventDate.setText(event.getEventDate());
     }
 
     @Override
     public int getItemCount() {
-        return eventList.size();
+        return joinedEventList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{

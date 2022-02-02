@@ -15,6 +15,7 @@ public class Event {
     private String uid;
     private Boolean isJoined;
     private List<String> userUids;
+    private String eventDate;
 
     public Event(){
 
@@ -26,6 +27,21 @@ public class Event {
         this.uid = uid;
         this.isJoined = isJoined;
         this.userUids = userUids;
+    }
+
+    public Event(String typeName, String time, String uid, String eventDate) {
+        this.typeName = typeName;
+        this.time = time;
+        this.uid = uid;
+        this.eventDate = eventDate;
+    }
+
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
     }
 
     public List<String> getUserUids() {

@@ -25,12 +25,10 @@ import org.w3c.dom.Text;
 public class ProfileFragment extends Fragment {
 
     private Button logout;
-    private FirebaseUser user;
-    private DatabaseReference reference;
-    private String userID;
     private View view = null;
     private TextView fullName;
     private TextView email;
+    private TextView count;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,15 +37,27 @@ public class ProfileFragment extends Fragment {
         if(view == null)
             view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
+        init(view);
+        clickOnLogoutListener();
+        return view;
+    }
+
+    public void init(View view){
         fullName = view.findViewById(R.id.user_name);
         email = view.findViewById(R.id.email_profile);
         logout = view.findViewById(R.id.logout_button);
+        count = view.findViewById(R.id.joined_count);
 
         fullName.setText(GeneralActivity.user.getFullName());
         email.setText(GeneralActivity.user.getEmail());
+        if(GeneralActivity.user.getEvents() == null)
+            count.setText("0");
+        else
+            count.setText(String.valueOf(GeneralActivity.user.getEvents().size()));
+    }
 
+    public void clickOnLogoutListener(){
         logout.setOnClickListener(v -> {
-
             AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                     .setTitle("We will miss you!")
                     .setMessage("Are you sure you want to log out?")
@@ -62,6 +72,5 @@ public class ProfileFragment extends Fragment {
                     .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel())
                     .show();
         });
-        return view;
     }
 }
