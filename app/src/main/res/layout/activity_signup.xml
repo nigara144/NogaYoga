@@ -32,7 +32,7 @@
 
     <EditText
         android:id="@+id/full_name"
-        android:layout_width="360dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="430dp"
         android:inputType="textPersonName"
@@ -42,7 +42,7 @@
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="360dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="500dp"
         android:inputType="textEmailAddress"
@@ -52,7 +52,7 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="360dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="570dp"
         android:inputType="textPassword"
@@ -60,28 +60,16 @@
         android:layout_centerHorizontal="true"
         />
 
-<!--    <Button-->
-<!--        android:id="@+id/sign_up_btn"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_marginTop="100dp"-->
-<!--        android:text="Sign Up"-->
-<!--        android:textSize="20dp"-->
-<!--        android:backgroundTint="#8F0937"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        app:layout_constraintTop_toTopOf="@id/password"-->
-<!--        />-->
-
         <Button
             android:id="@+id/sign_up_btn"
             android:text="CREATE ACCOUNT"
             android:background="@drawable/round_button"
             android:padding="6dp"
             android:textSize="17dp"
-            android:layout_width="360dp"
+            android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="680dp"
+            android:layout_marginTop="650dp"
             />
 
     <ProgressBar
