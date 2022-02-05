@@ -22,7 +22,7 @@
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +33,10 @@
             android:textStyle="normal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:inputType="none"
+            android:enabled="false"
+            android:background="@android:color/transparent"/>
 
         <View
             android:layout_width="300dp"
@@ -50,7 +53,21 @@
             android:layout_marginTop="160dp"
             android:src="@drawable/pencil"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="editUserName"
+            />
+
+        <ImageView
+            android:id="@+id/save_icon"
+            android:visibility="gone"
+            android:layout_width="20dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="160dp"
+            android:src="@drawable/save"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="saveEditedUserName"/>
 
         <ImageView
             android:id="@+id/email_icon"

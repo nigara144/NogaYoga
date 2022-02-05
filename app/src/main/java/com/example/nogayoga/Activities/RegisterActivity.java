@@ -111,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             Map<String, Object> user = new HashMap<>();
                             user.put("fullName", fullName);
                             user.put("email", email);
+                            user.put("count", 0);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(@NonNull Void unused) {
@@ -123,23 +124,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     Log.d("TAG", "OnFailure: " + e.toString());
                                 }
                             });
-
-//                          //This is the old code:
-//                            User user = new User(fullName, email);
-//                            FirebaseDatabase.getInstance().getReference("Users")
-//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    if(task.isSuccessful()){
-//                                        Toast.makeText(RegisterUser.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
-//                                        progressBar.setVisibility(View.GONE);
-//                                    }else{
-//                                        Toast.makeText(RegisterUser.this, "Failed to register.Try again", Toast.LENGTH_LONG).show();
-//                                        progressBar.setVisibility(View.GONE);
-//                                    }
-//                                }
-//                            });
                         }else{
                             Toast.makeText(RegisterActivity.this, "Failed to register.Try again", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);

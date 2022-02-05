@@ -11,9 +11,8 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/video_img"
         android:layout_weight="1"
-        android:layout_width="210dp"
+        android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:adjustViewBounds="true"
         android:scaleType="fitXY"
         app:shapeAppearance="@style/roundimageview"
         />
@@ -21,14 +20,17 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_weight="1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
     <TextView
         android:id="@+id/video_name"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
+        android:maxLines="2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="textMultiLine"
+        android:lines="2"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="7dp"
         android:textSize="16dp"
@@ -59,7 +61,6 @@
         android:id="@+id/link_btn"
         android:layout_width="60dp"
         android:layout_height="30dp"
-        android:layout_marginTop="12dp"
         android:layout_marginLeft="100dp"
         android:layout_gravity="center_vertical"
         android:textSize="12dp"

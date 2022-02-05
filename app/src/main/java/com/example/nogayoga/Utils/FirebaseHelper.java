@@ -65,33 +65,7 @@ public class FirebaseHelper {
 //        return users.isEmpty() ? null : users.get(0);
 //    }
 
-//    public boolean signInPasswordAndEmail(String password, String email, Context context){
-//        final boolean[] flag = {false};
-//        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                if(task.isSuccessful()){
-//                    Log.d("TAG", "OnSuccess: login");
-//                    flag[0] = true;
-//                }else{
-//                    Toast.makeText(context, task.getException().toString(), Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Log.d("TAG", "OnFailure: login "+ e);
-//            }
-//        });
-//        return flag[0];
-//    }
-//
-//    public static void addUser(User user) {
-//        db.collection("Users").document(getUid())
-//                .set(user)
-//                .addOnSuccessListener(aVoid -> Log.d("firebase", "DocumentSnapshot successfully written!"))
-//                .addOnFailureListener(e -> Log.w("firebase", "Error adding document", e));
-//    }
+
 
     public static void getUserDetails(final UserReadyCallBack callBackUsersReady) {
         String uid = getUid();
@@ -104,28 +78,6 @@ public class FirebaseHelper {
             });
         }
     }
-
-//    public static void getAllVideosByType(String type) {
-//        String uid = getUid();
-//        if (!uid.equals("")) {
-//            List<Video> list;
-//            CollectionReference collectionRef = db.collection("Videos").document(type).collection("Clips");
-//            collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                    if(task.isSuccessful()){
-//                        list = new ArrayList<>();
-//                        for (QueryDocumentSnapshot document : task.getResult()) {
-//                            list.add(document.toObject(Video.class));
-//                        }
-//                        Log.d("TAG", list.toString());
-//                    } else {
-//                        Log.d("TAG", "Error getting documents: ", task.getException());
-//                    }
-//                }
-//            });
-//        }
-//    }
 
     public static void logOut(final LogoutSuccessCallBack logoutSuccessCallback) {
         FirebaseAuth.getInstance().signOut();

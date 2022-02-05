@@ -4,12 +4,16 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nogayoga.Activities.GeneralActivity;
@@ -17,18 +21,33 @@ import com.example.nogayoga.Interfaces.LogoutSuccessCallBack;
 import com.example.nogayoga.Activities.MainActivity;
 import com.example.nogayoga.R;
 import com.example.nogayoga.Utils.FirebaseHelper;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
 
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileFragment extends Fragment {
 
     private Button logout;
     private View view = null;
-    private TextView fullName;
+    private EditText fullName;
     private TextView email;
     private TextView count;
+    private ImageView edit, save;
+    private String tempFullName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +58,24 @@ public class ProfileFragment extends Fragment {
 
         init(view);
         clickOnLogoutListener();
+        clickListenerEditAndSave();
+
         return view;
+    }
+
+    private void clickListenerEditAndSave() {
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editUserName();
+            }
+        });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveEditedUserName();
+            }
+        });
     }
 
     public void init(View view){
@@ -47,14 +83,48 @@ public class ProfileFragment extends Fragment {
         email = view.findViewById(R.id.email_profile);
         logout = view.findViewById(R.id.logout_button);
         count = view.findViewById(R.id.joined_count);
+        edit = view.findViewById(R.id.edit_icon);
+        save = view.findViewById(R.id.save_icon);
 
         fullName.setText(GeneralActivity.user.getFullName());
         email.setText(GeneralActivity.user.getEmail());
-        if(GeneralActivity.user.getEvents() == null)
-            count.setText("0");
-        else
-            count.setText(String.valueOf(GeneralActivity.user.getEvents().size()));
+        count.setText(String.valueOf(GeneralActivity.user.getCount()));
     }
+
+    public void editUserName(){
+        edit.setVisibility(View.GONE);
+        save.setVisibility(View.VISIBLE);
+        tempFullName = fullName.getText().toString();
+        fullName.setEnabled(true);
+    }
+
+    public void saveEditedUserName(){
+        tempFullName = fullName.getText().toString();
+        saveEditedDataToDB();
+    }
+
+    private void saveEditedDataToDB() {
+        String userID = FirebaseHelper.mAuth.getCurrentUser().getUid();
+        DocumentReference documentReference = FirebaseHelper.db.collection("Users").document(userID);
+        Map<String, Object> user = new HashMap<>();
+        user.put("fullName", tempFullName);
+        documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(@NonNull Void unused) {
+                GeneralActivity.user.setFullName(tempFullName);
+                edit.setVisibility(View.VISIBLE);
+                save.setVisibility(View.GONE);
+                fullName.setEnabled(false);
+                Log.d("UPDATE PROFILE", "User name edited successfully");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("TAG", "OnFailure: " + e.toString());
+            }
+        });
+    }
+
 
     public void clickOnLogoutListener(){
         logout.setOnClickListener(v -> {

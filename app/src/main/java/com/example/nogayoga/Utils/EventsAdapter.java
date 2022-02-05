@@ -10,8 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.nogayoga.Activities.GeneralActivity;
 import com.example.nogayoga.Fragments.CalendarFragment;
 import com.example.nogayoga.Models.Event;
+import com.example.nogayoga.Models.User;
 import com.example.nogayoga.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -78,8 +81,24 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
                 map.put("userUids",event.getUserUids());
                 updateEventParticipants(event, map);
                 updateUserEvents(event, false);
+                updateUserEventCount(true);
             }
         });
+    }
+
+    private void updateUserEventCount(Boolean add) {
+        DocumentReference documentReference = FirebaseHelper.db.collection("Users").
+                document(FirebaseHelper.getUid());
+        Map<String, Object> map = new HashMap<>();
+        if(!add){
+            //minus
+            GeneralActivity.user.reduceCount();
+        }else{
+            //plus
+            GeneralActivity.user.addCount();
+        }
+        map.put("count", GeneralActivity.user.getCount());
+        documentReference.update(map);
     }
 
     private void updateUserEvents(Event event, Boolean rmv) {
@@ -109,6 +128,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
                 map.put("userUids",event.getUserUids());
                 updateEventParticipants(event, map);
                 updateUserEvents(event, true);
+                updateUserEventCount(false);
             }
         });
     }
