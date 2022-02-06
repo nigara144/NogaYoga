@@ -82,7 +82,7 @@ public class CalendarFragment extends Fragment {
         eventList.clear();
         getAllEventsByDate(dateStr);
     }
-
+//
     private void getAllEventsByDate(String dateStr) {
         Log.d("DATE", dateStr);
         //get all events in db where this date is equal to date in timestamp
