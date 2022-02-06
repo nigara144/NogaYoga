@@ -14,13 +14,12 @@ import com.example.nogayoga.Fragments.HomeFragment;
 import com.example.nogayoga.Fragments.ProfileFragment;
 import com.example.nogayoga.Models.User;
 import com.example.nogayoga.R;
-import com.example.nogayoga.Fragments.VideosFragment;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class GeneralActivity extends AppCompatActivity {
 
     private Button profile;
-    static User user;
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +42,6 @@ public class GeneralActivity extends AppCompatActivity {
                     case R.id.nav_home:
                         fragment = new HomeFragment();
                         break;
-//                    case R.id.nav_videos:
-//                        fragment = new VideosFragment();
-//                        break;
                     case R.id.nav_calendar:
                         fragment = new CalendarFragment();
                         break;
