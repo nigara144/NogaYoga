@@ -4,15 +4,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +16,9 @@ import android.widget.TextView;
 
 import com.example.nogayoga.Activities.GeneralActivity;
 import com.example.nogayoga.Models.Event;
-import com.example.nogayoga.Models.Video;
 import com.example.nogayoga.R;
 import com.example.nogayoga.Utils.FirebaseHelper;
 import com.example.nogayoga.Utils.HomeEventsAdapter;
-import com.example.nogayoga.Utils.MyAdapterVideos;
 import com.example.nogayoga.Utils.TabsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,7 +26,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -83,7 +75,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadRecyclerViewData() {
-//        joinedEventList.clear();
         getAllJoinedEventsFromUser();
     }
 
@@ -96,13 +87,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-//                    Log.d("TAG", String.valueOf(task.getResult().getDocuments().size()));
                         for(DocumentSnapshot doc: task.getResult().getDocuments()) {
                             joinedEventList.add(new Event(doc.getString("typeName"),
                                     doc.getString("time"), doc.getId(), doc.getString("date")));
                         }
                         setRecyclerView();
-                        Log.d("JOINED LIST", joinedEventList.toString());
                 }
             }
         });

@@ -21,20 +21,9 @@ import com.example.nogayoga.Interfaces.LogoutSuccessCallBack;
 import com.example.nogayoga.Activities.MainActivity;
 import com.example.nogayoga.R;
 import com.example.nogayoga.Utils.FirebaseHelper;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Transaction;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -124,7 +113,6 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-
 
     public void clickOnLogoutListener(){
         logout.setOnClickListener(v -> {

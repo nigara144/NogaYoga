@@ -28,14 +28,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editPassword, editEmail;
     private ProgressBar progressBar;
     private Button loginUser;
-    private String userID;
     User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initActivity();
+    }
 
+    public void initActivity(){
         register = (TextView) findViewById(R.id.register);
         register.setOnClickListener(this);
 
@@ -94,8 +96,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        Log.d("login", "signInWithEmail:success");
-                        String userUId = FirebaseHelper.getUid();
                         FirebaseHelper.getUserDetails(new UserReadyCallBack() {
                             @Override
                             public void userReady(User user1) {

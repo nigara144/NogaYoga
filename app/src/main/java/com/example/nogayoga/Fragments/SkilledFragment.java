@@ -72,7 +72,6 @@ public class SkilledFragment extends Fragment {
                         videos.add(document.toObject(Video.class));
                     }
                     setRecyclerView();
-                    Log.d("TAG", videos.toString());
                 } else {
                     Log.d("TAG", "Error getting documents: ", task.getException());
                 }

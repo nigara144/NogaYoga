@@ -29,11 +29,14 @@ public class GeneralActivity extends AppCompatActivity {
         getUserData();
         Log.d("User", user.toString());
         NavigationBarView navigationBarView = findViewById(R.id.bottom_navigation);
-
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment()).commit();
         navigationBarView.setSelectedItemId(R.id.nav_home);
 
+        navigationBarSelection(navigationBarView);
+    }
+
+    private void navigationBarSelection(NavigationBarView navigationBarView) {
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -56,10 +59,9 @@ public class GeneralActivity extends AppCompatActivity {
         });
     }
 
+
     public void getUserData(){
-        Log.d("GETintent", getIntent().getStringExtra("USER"));
         user = new User();
         user = User.fromJson(getIntent().getStringExtra("USER"));
-
     }
 }

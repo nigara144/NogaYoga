@@ -39,7 +39,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        initActivity();
+    }
 
+    private void initActivity() {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 

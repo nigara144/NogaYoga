@@ -7,33 +7,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
-import com.example.nogayoga.Activities.GeneralActivity;
-import com.example.nogayoga.Interfaces.EventReadyCallBack;
+
 import com.example.nogayoga.Models.Event;
 import com.example.nogayoga.R;
 import com.example.nogayoga.Utils.EventsAdapter;
 import com.example.nogayoga.Utils.FirebaseHelper;
-import com.example.nogayoga.Utils.MyAdapterVideos;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Text;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class CalendarFragment extends Fragment {
@@ -82,9 +74,8 @@ public class CalendarFragment extends Fragment {
         eventList.clear();
         getAllEventsByDate(dateStr);
     }
-//
+
     private void getAllEventsByDate(String dateStr) {
-        Log.d("DATE", dateStr);
         //get all events in db where this date is equal to date in timestamp
         CollectionReference collectionRef = FirebaseHelper.db.collection("Classes").
                 document(dateStr).collection("Events");
@@ -93,17 +84,14 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    Log.d("TAG", String.valueOf(task.getResult().getDocuments().size()));
                     for(DocumentSnapshot doc: task.getResult().getDocuments()){
                         ArrayList<String> userUids = new ArrayList<String>();
                         userUids = (ArrayList<String>)doc.get("userUids");
-                        Log.d("USER UIDS ", userUids.toString());
                         Boolean isJoined = checkIfJoined(userUids);
                         eventList.add(new Event(doc.getString("typeName"),
                                 doc.getString("time"), doc.getId(), userUids, isJoined));
                     }
                     setRecyclerView(dateStr);
-                    Log.d("TAG", eventList.toString());
                 }
             }
         });
@@ -120,7 +108,6 @@ public class CalendarFragment extends Fragment {
             adapter.notifyDataSetChanged();
             recyclerView.setVerticalScrollbarPosition(adapter.getItemCount());
         }
-        Log.d("EVENT: ", String.valueOf(adapter.getItemCount()));
         recyclerView.smoothScrollToPosition(adapter.getItemCount());
     }
 }

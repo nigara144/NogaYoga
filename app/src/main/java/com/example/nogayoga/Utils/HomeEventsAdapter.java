@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nogayoga.Activities.GeneralActivity;
 import com.example.nogayoga.Models.Event;
 import com.example.nogayoga.R;
 
@@ -22,7 +21,6 @@ public class HomeEventsAdapter extends RecyclerView.Adapter<HomeEventsAdapter.My
     private List<Event> joinedEventList;
     private Context context;
     private FragmentActivity fragmentContext;
-    private String eventJoinedDate;
 
     public HomeEventsAdapter(List<Event> joinedEventList, Context context, FragmentActivity activity) {
         this.joinedEventList = joinedEventList;

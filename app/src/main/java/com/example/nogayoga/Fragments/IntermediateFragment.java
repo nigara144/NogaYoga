@@ -64,7 +64,6 @@ public class IntermediateFragment extends Fragment {
     }
 
     private void getAllVideosByType(String type) {
-        String userId = FirebaseHelper.getUid();
         CollectionReference collectionRef = FirebaseHelper.db.collection("Videos").document(type).collection("Clips");
         collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -74,7 +73,6 @@ public class IntermediateFragment extends Fragment {
                         videos.add(document.toObject(Video.class));
                     }
                     setRecyclerView();
-                    Log.d("TAG", videos.toString());
                 } else {
                     Log.d("TAG", "Error getting documents: ", task.getException());
                 }
