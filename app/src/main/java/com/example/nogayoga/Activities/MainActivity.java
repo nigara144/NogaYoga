@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nogayoga.DB.Mongo;
 import com.example.nogayoga.Interfaces.LogoutSuccessCallBack;
 import com.example.nogayoga.Interfaces.UserReadyCallBack;
 import com.example.nogayoga.Models.User;
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initActivity();
+
+        Mongo mongo = new Mongo();
+        mongo.connect();
+        mongo.insert("hod", "hod@g.com", "053324244");
     }
 
     public void initActivity(){

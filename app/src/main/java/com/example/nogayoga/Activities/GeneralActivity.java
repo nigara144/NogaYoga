@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.example.nogayoga.DB.Mongo;
 import com.example.nogayoga.Fragments.CalendarFragment;
+import com.example.nogayoga.Fragments.FavoritesFragment;
 import com.example.nogayoga.Fragments.HomeFragment;
 import com.example.nogayoga.Fragments.ProfileFragment;
 import com.example.nogayoga.Models.User;
@@ -27,6 +29,9 @@ public class GeneralActivity extends AppCompatActivity {
         setContentView(R.layout.activity_general);
 
         getUserData();
+
+//        initMongo();
+
         Log.d("User", user.toString());
         NavigationBarView navigationBarView = findViewById(R.id.bottom_navigation);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -34,6 +39,12 @@ public class GeneralActivity extends AppCompatActivity {
         navigationBarView.setSelectedItemId(R.id.nav_home);
 
         navigationBarSelection(navigationBarView);
+    }
+
+    private void initMongo() {
+        Mongo mongo = new Mongo();
+        mongo.connect();
+        mongo.insert("hod", "hod@g.com", "053324244");
     }
 
     private void navigationBarSelection(NavigationBarView navigationBarView) {
@@ -47,6 +58,9 @@ public class GeneralActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_calendar:
                         fragment = new CalendarFragment();
+                        break;
+                    case R.id.nav_favorites:
+                        fragment = new FavoritesFragment();
                         break;
                     case R.id.nav_profile:
                         fragment = new ProfileFragment();
