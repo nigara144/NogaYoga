@@ -5,25 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
-    tools:context=".Fragments.FavoritesFragment">
+    tools:context=".Fragments.MeditationFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/title_favorites"
+        android:id="@+id/title_meditation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
-        android:text="Favorites"
+        android:text="Meditation"
         android:textColor="@color/round_button_color"
         android:textStyle="bold"
         android:textSize="25dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_favorites"
+            android:id="@+id/recycler_view_meditation"
             android:layout_width="wrap_content"
             android:padding="10dp"
             android:layout_height="wrap_content"
