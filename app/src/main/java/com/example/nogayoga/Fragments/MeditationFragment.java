@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nogayoga.Utils.ProgressBarDialog;
 import com.example.nogayoga.DB.DynamoDBController;
 import com.example.nogayoga.Models.Meditation;
 import com.example.nogayoga.Models.Video;
@@ -42,6 +43,7 @@ public class MeditationFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private List<Meditation> meditation_videos;
     private DynamoDBController dynamoDBController;
+    private ProgressBarDialog progressBarDialog;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class MeditationFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view_meditation);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        progressBarDialog = ProgressBarDialog.newInstance("Loading");
     }
 
     public void setClickListeners(){
@@ -69,10 +72,11 @@ public class MeditationFragment extends Fragment {
 
     private void loadRecyclerViewData() {
         //here we get the videos from the other DB
-        getAllAssignmentFromDB();
+        progressBarDialog.show(getActivity().getSupportFragmentManager(), "Loading");
+        getAllMeditationsFromDB();
     }
 
-    private void getAllAssignmentFromDB() {
+    private void getAllMeditationsFromDB() {
         okhttp3.OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         Request request = new Request.Builder()
@@ -84,8 +88,8 @@ public class MeditationFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                System.out.println("Failed to get all assignments");
-//                progressBarDialog.dismiss();
+                System.out.println("Failed to get all meditations");
+                progressBarDialog.dismiss();
                 Log.d("ERROR:", "Connection failed");
             }
 
@@ -130,7 +134,7 @@ public class MeditationFragment extends Fragment {
                     recyclerView.setVerticalScrollbarPosition(adapter.getItemCount());
                 }
                 recyclerView.smoothScrollToPosition(adapter.getItemCount());
-               // progressBarDialog.dismiss();
+                progressBarDialog.dismiss();
             });
         }catch (JSONException e) {
             e.printStackTrace();
