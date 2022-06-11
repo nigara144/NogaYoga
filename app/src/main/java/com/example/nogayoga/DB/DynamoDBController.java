@@ -65,7 +65,7 @@ public class DynamoDBController {
 //        return true;
 //    }
 
-    public Boolean getAll(Video video){
+    public Boolean getAll(){
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
 //        MediaType mediaType = MediaType.parse("application/json");
