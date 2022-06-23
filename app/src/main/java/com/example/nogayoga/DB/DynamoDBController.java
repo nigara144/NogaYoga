@@ -36,40 +36,9 @@ public class DynamoDBController {
         this.fragmentActivity = null;
     }
 
-//    public Boolean insert(Video video){
-//        System.out.println("here\n" + video.toString());
-//        OkHttpClient client = new OkHttpClient().newBuilder()
-//                .build();
-//        MediaType mediaType = MediaType.parse("application/json");
-//        RequestBody body = RequestBody.create(video.toString(), mediaType);
-//        Request request = new Request.Builder()
-//                .url(DYNAMO_SERVER_URL + "add-audio")
-//                .method("POST", body)
-//                .addHeader("Content-Type", "application/json")
-//                .build();
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//            }
-//
-//            @Override
-//            public void onResponse(@NotNull Call call, @NotNull Response response) {
-//                if(response.isSuccessful() && response.body() != null) {
-//                    Log.d("SUCCESS ::", "insert");
-//                    fragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MeditationFragment()).commit();
-//                }else{
-//                    Log.d("FAILED ::", "insert");
-//                }
-//            }
-//        });
-//        return true;
-//    }
-
     public Boolean getAll(){
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
-//        MediaType mediaType = MediaType.parse("application/json");
-//        RequestBody body = RequestBody.create(video.toString(), mediaType);
         Request request = new Request.Builder()
                 .url(DYNAMO_SERVER_URL + "get-all")
                 .method("GET", null)

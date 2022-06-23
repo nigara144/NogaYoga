@@ -83,23 +83,6 @@ public class IntermediateFragment extends Fragment {
         getAllVideosByType("mid");
     }
 
-//    private void getAllVideosByType(String type) {
-//        CollectionReference collectionRef = FirebaseHelper.db.collection("Videos").document(type).collection("Clips");
-//        collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if(task.isSuccessful()){
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        videos.add(document.toObject(Video.class));
-//                    }
-//                    setRecyclerView();
-//                } else {
-//                    Log.d("TAG", "Error getting documents: ", task.getException());
-//                }
-//            }
-//        });
-//    }
-
     private void getAllVideosByType(String type) {
         okhttp3.OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -164,18 +147,5 @@ public class IntermediateFragment extends Fragment {
         }catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-//        public void  setRecyclerView(){
-//        Handler mHandler = new Handler(Looper.getMainLooper());
-//        mHandler.post(() -> {
-//            adapter = new MyAdapterVideos(videos, getContext(), getActivity());
-//            recyclerView.setAdapter(adapter);
-//            if (adapter != null) {
-//                adapter.notifyDataSetChanged();
-//                recyclerView.setVerticalScrollbarPosition(adapter.getItemCount());
-//            }
-//            recyclerView.smoothScrollToPosition(adapter.getItemCount());
-//        });
     }
 }
